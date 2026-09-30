@@ -3,6 +3,7 @@ set -euo pipefail
 
 # ============================================================================
 # CH32V003 自动化构建脚本（仅编译，不烧录）
+# 生成 main.elf / main.bin / main.hex / main.lst
 # ============================================================================
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -80,7 +81,7 @@ else
 fi
 
 echo ""
-echo "=== 5. 生成项目 Makefile（不覆盖 all 目标） ==="
+echo "=== 5. 生成项目 Makefile ==="
 MK_FILE_PATH=$(find "$FUN_DIR" -name "ch32fun.mk" -o -name "ch32v003fun.mk" | head -n 1)
 
 if [ -z "$MK_FILE_PATH" ]; then
@@ -91,8 +92,8 @@ fi
 CH32FUN_CORE_DIR=$(dirname "$MK_FILE_PATH")
 MK_FILE_NAME=$(basename "$MK_FILE_PATH")
 
-# 关键：变量先定义好，再 include ch32fun.mk；
-# 不再自定义 all 目标，避免与库中的 all 规则冲突，也避免误触发 flash。
+# 变量必须先定义，再 include ch32fun.mk
+# 不定义 all，避免与库中可能不存在的规则冲突
 cat << EOF > "$ROOT_DIR/Makefile"
 TARGET:=$PROJECT_NAME
 CH32FUN:=$CH32FUN_CORE_DIR
@@ -111,10 +112,13 @@ echo ""
 echo "=== 6. 开始编译项目（仅编译，不烧录） ==="
 cd "$ROOT_DIR"
 make clean
-if make "$PROJECT_NAME.elf"; then
+
+# 直接指定具体文件作为目标，make 会自动按依赖链生成 .elf -> .bin / .hex
+if make "$PROJECT_NAME.elf" "$PROJECT_NAME.bin" "$PROJECT_NAME.hex"; then
     echo ""
     echo "✅ 编译成功！"
-    echo "输出文件: $PROJECT_NAME.elf, $PROJECT_NAME.bin, $PROJECT_NAME.hex"
+    echo "输出文件:"
+    ls -lh "$PROJECT_NAME.elf" "$PROJECT_NAME.bin" "$PROJECT_NAME.hex" 2>/dev/null || true
     echo "（已跳过烧录，如需烧录请手动执行: make flash）"
 else
     echo "❌ 编译失败，请检查 main.c 或库配置。"

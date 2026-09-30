@@ -1,0 +1,291 @@
+
+main.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .init:
+
+00000000 <InterruptVector>:
+   0:	0f40006f          	j	f4 <handle_reset>
+   4:	00000000          	.word	0x00000000
+   8:	000001ac          	.word	0x000001ac
+   c:	00000160          	.word	0x00000160
+	...
+  30:	00000160          	.word	0x00000160
+  34:	00000000          	.word	0x00000000
+  38:	00000160          	.word	0x00000160
+  3c:	00000000          	.word	0x00000000
+  40:	00000160          	.word	0x00000160
+  44:	00000160          	.word	0x00000160
+  48:	00000160          	.word	0x00000160
+  4c:	00000160          	.word	0x00000160
+  50:	00000160          	.word	0x00000160
+  54:	00000160          	.word	0x00000160
+  58:	00000160          	.word	0x00000160
+  5c:	00000160          	.word	0x00000160
+  60:	00000160          	.word	0x00000160
+  64:	00000160          	.word	0x00000160
+  68:	00000160          	.word	0x00000160
+  6c:	00000160          	.word	0x00000160
+  70:	00000160          	.word	0x00000160
+  74:	00000160          	.word	0x00000160
+  78:	00000160          	.word	0x00000160
+  7c:	00000160          	.word	0x00000160
+  80:	00000160          	.word	0x00000160
+  84:	00000160          	.word	0x00000160
+  88:	00000160          	.word	0x00000160
+  8c:	00000160          	.word	0x00000160
+  90:	00000160          	.word	0x00000160
+  94:	00000160          	.word	0x00000160
+  98:	00000160          	.word	0x00000160
+  9c:	0000                	.insn	2, 0x
+	...
+
+Disassembly of section .text:
+
+000000a0 <PrintHex>:
+  a0:	e00007b7          	lui	a5,0xe0000
+  a4:	0f478793          	addi	a5,a5,244 # e00000f4 <_eusrstack+0xbffff8f4>
+  a8:	4398                	lw	a4,0(a5)
+  aa:	08077713          	andi	a4,a4,128
+  ae:	ff6d                	bnez	a4,a8 <PrintHex+0x8>
+  b0:	78302737          	lui	a4,0x78302
+  b4:	08870713          	addi	a4,a4,136 # 78302088 <_eusrstack+0x58301888>
+  b8:	e00006b7          	lui	a3,0xe0000
+  bc:	c398                	sw	a4,0(a5)
+  be:	0f468693          	addi	a3,a3,244 # e00000f4 <_eusrstack+0xbffff8f4>
+  c2:	4771                	li	a4,28
+  c4:	4325                	li	t1,9
+  c6:	55f1                	li	a1,-4
+  c8:	429c                	lw	a5,0(a3)
+  ca:	0807f793          	andi	a5,a5,128
+  ce:	ffed                	bnez	a5,c8 <PrintHex+0x28>
+  d0:	00e55633          	srl	a2,a0,a4
+  d4:	8a3d                	andi	a2,a2,15
+  d6:	05700793          	li	a5,87
+  da:	00c36463          	bltu	t1,a2,e2 <PrintHex+0x42>
+  de:	03000793          	li	a5,48
+  e2:	97b2                	add	a5,a5,a2
+  e4:	07a2                	slli	a5,a5,0x8
+  e6:	0857e793          	ori	a5,a5,133
+  ea:	c29c                	sw	a5,0(a3)
+  ec:	1771                	addi	a4,a4,-4
+  ee:	fcb71de3          	bne	a4,a1,c8 <PrintHex+0x28>
+  f2:	8082                	ret
+
+000000f4 <handle_reset>:
+  f4:	20000197          	auipc	gp,0x20000
+  f8:	30818193          	addi	gp,gp,776 # 200003fc <__global_pointer$>
+  fc:	40418113          	addi	sp,gp,1028 # 20000800 <_eusrstack>
+ 100:	6509                	lui	a0,0x2
+ 102:	88050513          	addi	a0,a0,-1920 # 1880 <ch32fun.c.8cbceafd+0x8c8>
+ 106:	30051073          	csrw	mstatus,a0
+ 10a:	00000697          	auipc	a3,0x0
+ 10e:	ef668693          	addi	a3,a3,-266 # 0 <InterruptVector>
+ 112:	0036e693          	ori	a3,a3,3
+ 116:	30569073          	csrw	mtvec,a3
+ 11a:	c0418513          	addi	a0,gp,-1020 # 20000000 <_data_vma>
+ 11e:	c0418593          	addi	a1,gp,-1020 # 20000000 <_data_vma>
+ 122:	4601                	li	a2,0
+ 124:	00b55663          	bge	a0,a1,130 <handle_reset+0x3c>
+ 128:	c110                	sw	a2,0(a0)
+ 12a:	0511                	addi	a0,a0,4
+ 12c:	feb54ee3          	blt	a0,a1,128 <handle_reset+0x34>
+ 130:	27c00513          	li	a0,636
+ 134:	c0418593          	addi	a1,gp,-1020 # 20000000 <_data_vma>
+ 138:	c0418613          	addi	a2,gp,-1020 # 20000000 <_data_vma>
+ 13c:	00c58863          	beq	a1,a2,14c <handle_reset+0x58>
+ 140:	4114                	lw	a3,0(a0)
+ 142:	c194                	sw	a3,0(a1)
+ 144:	0511                	addi	a0,a0,4
+ 146:	0591                	addi	a1,a1,4
+ 148:	fec59ae3          	bne	a1,a2,13c <handle_reset+0x48>
+ 14c:	e000f7b7          	lui	a5,0xe000f
+ 150:	4705                	li	a4,1
+ 152:	c398                	sw	a4,0(a5)
+ 154:	21c00793          	li	a5,540
+ 158:	34179073          	csrw	mepc,a5
+ 15c:	30200073          	mret
+
+00000160 <ADC1_2_IRQHandler>:
+
+// Return the Machine Exception Program Register (MEPC)
+static inline uint32_t __get_MEPC(void)
+{
+	uint32_t result;
+	__ASM volatile( ADD_ARCH_ZICSR "csrr %0," "mepc" : "=r"(result));
+ 160:	34102573          	csrr	a0,mepc
+void DefaultIRQHandler( void )
+{
+#if FUNCONF_DEBUG_HARDFAULT && ( FUNCONF_USE_DEBUGPRINTF || FUNCONF_USE_UARTPRINTF || FUNCONF_USE_USBPRINTF )
+	//This is kind of like a crash handler.
+	//printf( "DEAD MSTATUS:%08x MTVAL:%08x MCAUSE:%08x MEPC:%08x\n", (int)__get_MSTATUS(), (int)__get_MTVAL(), (int)__get_MCAUSE(), (int)__get_MEPC() );
+	PrintHex( __get_MEPC() ); // "addr2line -e debugprintfdemo.elf 0x000007e6" ---> debugprintfdemo.c:45
+ 164:	3f35                	jal	a0 <PrintHex>
+	__ASM volatile( ADD_ARCH_ZICSR "csrr %0, mstatus": "=r"(result) );
+ 166:	30002573          	csrr	a0,mstatus
+	PrintHex( __get_MSTATUS() );
+ 16a:	3f1d                	jal	a0 <PrintHex>
+
+// Return the Machine Trap Value Register (MTVAL)
+static inline uint32_t __get_MTVAL(void)
+{
+	uint32_t result;
+	__ASM volatile( ADD_ARCH_ZICSR "csrr %0," "mtval" : "=r" (result) );
+ 16c:	34302573          	csrr	a0,mtval
+	PrintHex( __get_MTVAL() );
+ 170:	3f05                	jal	a0 <PrintHex>
+	__ASM volatile( ADD_ARCH_ZICSR "csrr %0," "mcause": "=r"(result));
+ 172:	34202573          	csrr	a0,mcause
+	PrintHex( __get_MCAUSE() );
+ 176:	372d                	jal	a0 <PrintHex>
+#if FUNCONF_USE_DEBUGPRINTF
+	while( (*DMDATA0) & 0x80 );
+ 178:	e00007b7          	lui	a5,0xe0000
+ 17c:	0f478793          	addi	a5,a5,244 # e00000f4 <_eusrstack+0xbffff8f4>
+ 180:	4398                	lw	a4,0(a5)
+ 182:	08077713          	andi	a4,a4,128
+ 186:	ff6d                	bnez	a4,180 <ADC1_2_IRQHandler+0x20>
+	*DMDATA0 = 0x0a85;
+ 188:	6705                	lui	a4,0x1
+ 18a:	a8570713          	addi	a4,a4,-1403 # a85 <_data_lma+0x809>
+ 18e:	c398                	sw	a4,0(a5)
+	while( (*DMDATA0) & 0x80 );
+ 190:	e00007b7          	lui	a5,0xe0000
+ 194:	0f478793          	addi	a5,a5,244 # e00000f4 <_eusrstack+0xbffff8f4>
+ 198:	4398                	lw	a4,0(a5)
+ 19a:	08077713          	andi	a4,a4,128
+ 19e:	ff6d                	bnez	a4,198 <ADC1_2_IRQHandler+0x38>
+	*DMDATA0 = 0xaaaaaa83;
+ 1a0:	aaaab737          	lui	a4,0xaaaab
+ 1a4:	a8370713          	addi	a4,a4,-1405 # aaaaaa83 <_eusrstack+0x8aaaa283>
+ 1a8:	c398                	sw	a4,0(a5)
+	putchar( '\n' );
+#endif
+#endif
+	//printf( "DEAD MSTATUS:%08x MTVAL:%08x MCAUSE:%08x MEPC:%08x\n", (int)__get_MSTATUS(), (int)__get_MTVAL(), (int)__get_MCAUSE(), (int)__get_MEPC() );
+	// Infinite Loop
+	asm volatile( "1: j 1b" );
+ 1aa:	a001                	j	1aa <ADC1_2_IRQHandler+0x4a>
+
+000001ac <NMI_Handler>:
+ * 			The sys clock is switched to HSI.
+ * 			Clears the CSSF flag in RCC->INTR
+ */
+void NMI_RCC_CSS_IRQHandler( void )
+{
+	RCC->INTR |= RCC_CSSC;	// clear the clock security int flag
+ 1ac:	40021737          	lui	a4,0x40021
+ 1b0:	471c                	lw	a5,8(a4)
+ 1b2:	008006b7          	lui	a3,0x800
+ 1b6:	8fd5                	or	a5,a5,a3
+ 1b8:	c71c                	sw	a5,8(a4)
+
+000001ba <SystemInit>:
+ 1ba:	400227b7          	lui	a5,0x40022
+ 1be:	4705                	li	a4,1
+ 1c0:	c398                	sw	a4,0(a5)
+ 1c2:	400217b7          	lui	a5,0x40021
+ 1c6:	01080737          	lui	a4,0x1080
+ 1ca:	0007a223          	sw	zero,4(a5) # 40021004 <_eusrstack+0x20020804>
+ 1ce:	08170713          	addi	a4,a4,129 # 1080081 <main.c.dadb54ac+0x107dd56>
+ 1d2:	c398                	sw	a4,0(a5)
+ 1d4:	009f0737          	lui	a4,0x9f0
+ 1d8:	c798                	sw	a4,8(a5)
+ 1da:	40021737          	lui	a4,0x40021
+ 1de:	431c                	lw	a5,0(a4)
+ 1e0:	00679693          	slli	a3,a5,0x6
+ 1e4:	fe06dde3          	bgez	a3,1de <SystemInit+0x24>
+ 1e8:	435c                	lw	a5,4(a4)
+ 1ea:	400216b7          	lui	a3,0x40021
+ 1ee:	9bf1                	andi	a5,a5,-4
+ 1f0:	0027e793          	ori	a5,a5,2
+ 1f4:	c35c                	sw	a5,4(a4)
+ 1f6:	4721                	li	a4,8
+ 1f8:	42dc                	lw	a5,4(a3)
+ 1fa:	8bb1                	andi	a5,a5,12
+ 1fc:	fee79ee3          	bne	a5,a4,1f8 <SystemInit+0x3e>
+ 200:	e00007b7          	lui	a5,0xe0000
+ 204:	0f878793          	addi	a5,a5,248 # e00000f8 <_eusrstack+0xbffff8f8>
+ 208:	0007a023          	sw	zero,0(a5)
+ 20c:	e00007b7          	lui	a5,0xe0000
+ 210:	0f478793          	addi	a5,a5,244 # e00000f4 <_eusrstack+0xbffff8f4>
+ 214:	08000713          	li	a4,128
+ 218:	c398                	sw	a4,0(a5)
+ 21a:	8082                	ret
+
+0000021c <main>:
+#include "ch32v003fun.h"
+#include <stdio.h>
+
+int main(void)
+{
+ 21c:	1151                	addi	sp,sp,-12
+ 21e:	c406                	sw	ra,8(sp)
+    // ch32v003fun 提供的系统时钟初始化
+    SystemInit();
+ 220:	3f69                	jal	1ba <SystemInit>
+
+    // 1. 开启 GPIOD 端口的时钟
+    RCC->APB2PCENR |= RCC_APB2Periph_GPIOD;
+ 222:	40021737          	lui	a4,0x40021
+ 226:	4f1c                	lw	a5,24(a4)
+
+    // 2. 配置 PD4 为推挽输出，10MHz 速度
+    // 先清除 PD4 的配置寄存器位
+    GPIOD->CFGLR &= ~(0xF << (4 * 4));
+ 228:	fff106b7          	lui	a3,0xfff10
+ 22c:	16fd                	addi	a3,a3,-1 # fff0ffff <_eusrstack+0xdff0f7ff>
+    RCC->APB2PCENR |= RCC_APB2Periph_GPIOD;
+ 22e:	0207e793          	ori	a5,a5,32
+ 232:	cf1c                	sw	a5,24(a4)
+    GPIOD->CFGLR &= ~(0xF << (4 * 4));
+ 234:	400117b7          	lui	a5,0x40011
+ 238:	40078793          	addi	a5,a5,1024 # 40011400 <_eusrstack+0x20010c00>
+ 23c:	4398                	lw	a4,0(a5)
+    GPIOD->CFGLR |= (GPIO_Speed_10MHz | GPIO_CNF_OUT_PP) << (4 * 4);
+
+    while(1)
+    {
+        // PD4 置高电平
+        GPIOD->BSHR = (1 << 4);
+ 23e:	4541                	li	a0,16
+ 240:	4341                	li	t1,16
+    GPIOD->CFGLR &= ~(0xF << (4 * 4));
+ 242:	8f75                	and	a4,a4,a3
+ 244:	c398                	sw	a4,0(a5)
+    GPIOD->CFGLR |= (GPIO_Speed_10MHz | GPIO_CNF_OUT_PP) << (4 * 4);
+ 246:	4398                	lw	a4,0(a5)
+ 248:	66c1                	lui	a3,0x10
+ 24a:	8f55                	or	a4,a4,a3
+#endif
+
+void DelaySysTick( uint32_t n )
+{
+#if defined(CH32V003) || defined(CH32V00x)
+	uint32_t targend = SysTick->CNT + n;
+ 24c:	002dc6b7          	lui	a3,0x2dc
+ 250:	c398                	sw	a4,0(a5)
+ 252:	6c068693          	addi	a3,a3,1728 # 2dc6c0 <main.c.dadb54ac+0x2da395>
+ 256:	e000f737          	lui	a4,0xe000f
+        GPIOD->BSHR = (1 << 4);
+ 25a:	0067a823          	sw	t1,16(a5)
+ 25e:	470c                	lw	a1,8(a4)
+ 260:	95b6                	add	a1,a1,a3
+	while( ((int32_t)( SysTick->CNT - targend )) < 0 );
+ 262:	4710                	lw	a2,8(a4)
+ 264:	8e0d                	sub	a2,a2,a1
+ 266:	fe064ee3          	bltz	a2,262 <main+0x46>
+        Delay_Ms(500);
+
+        // PD4 置低电平 (复位)
+        GPIOD->BCR = (1 << 4);
+ 26a:	cbc8                	sw	a0,20(a5)
+	uint32_t targend = SysTick->CNT + n;
+ 26c:	470c                	lw	a1,8(a4)
+ 26e:	95b6                	add	a1,a1,a3
+	while( ((int32_t)( SysTick->CNT - targend )) < 0 );
+ 270:	4710                	lw	a2,8(a4)
+ 272:	8e0d                	sub	a2,a2,a1
+ 274:	fe064ee3          	bltz	a2,270 <main+0x54>
+ 278:	b7cd                	j	25a <main+0x3e>
+	...
