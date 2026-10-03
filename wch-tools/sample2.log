@@ -1,0 +1,42 @@
+﻿openocd.exe : Open On-Chip Debugger 0.11.0+dev (2026-06-24-19:09)
+At line:16 char:1
++ & "$ocd\bin\openocd.exe" -s "$ocd\scripts" -f d:\test\github\CH32V003 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Open On-Chip De...26-06-24-19:09):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Info : only one transport option; autoselect 'sdi'
+Warn : Transport "sdi" was already selected
+Info : WCH-LinkE  mode:RV version 2.22 
+Info : wlink_init ok
+Info : clock speed 6000 kHz
+Info : [wch_riscv.cpu.0] datacount=2 progbufsize=8
+Info : [wch_riscv.cpu.0] Examined RISC-V core; found 1 harts
+Info : [wch_riscv.cpu.0]  XLEN=32, misa=0x40800014
+[wch_riscv.cpu.0] Target successfully examined.
+Info : starting gdb server for wch_riscv.cpu.0 on 3333
+Info : Listening on port 3333 for gdb connections
+RESULT SAMPLE0 A=0x0x0 C=0x0x2 D=0x0x0 PC=pc (/32): 0x000001de
+
+RESULT SAMPLE1 A=0x0x0 C=0x0x2 D=0x0x0 PC=pc (/32): 0x000001de
+
+RESULT SAMPLE2 A=0x0x0 C=0x0x0 D=0x0x0 PC=pc (/32): 0x000001e2
+
+RESULT SAMPLE3 A=0x0x0 C=0x0x2 D=0x0x0 PC=pc (/32): 0x000001e2
+
+RESULT SAMPLE4 A=0x0x0 C=0x0x0 D=0x0x0 PC=pc (/32): 0x000001de
+
+RESULT SAMPLE5 A=0x0x0 C=0x0x0 D=0x0x0 PC=pc (/32): 0x000001de
+
+RESULT SAMPLE6 A=0x0x0 C=0x0x0 D=0x0x0 PC=pc (/32): 0x000001de
+
+RESULT SAMPLE7 A=0x0x0 C=0x0x0 D=0x0x0 PC=pc (/32): 0x000001de
+
+RESULT SAMPLE8 A=0x0x0 C=0x0x0 D=0x0x0 PC=pc (/32): 0x000001e2
+
+RESULT SAMPLE9 A=0x0x0 C=0x0x0 D=0x0x0 PC=pc (/32): 0x000001de
+
+shutdown command invoked

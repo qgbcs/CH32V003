@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: 0BSD
+# Author: Lasse Collin
+
+prefix=/home/ilg/actions-runners/xpack-dev-tools/2/_work/riscv-none-elf-gcc-xpack/riscv-none-elf-gcc-xpack/build-assets/build/win32-x64/x86_64-pc-linux-gnu/install
+exec_prefix=/home/ilg/actions-runners/xpack-dev-tools/2/_work/riscv-none-elf-gcc-xpack/riscv-none-elf-gcc-xpack/build-assets/build/win32-x64/x86_64-pc-linux-gnu/install
+libdir=/home/ilg/actions-runners/xpack-dev-tools/2/_work/riscv-none-elf-gcc-xpack/riscv-none-elf-gcc-xpack/build-assets/build/win32-x64/x86_64-pc-linux-gnu/install/lib
+includedir=/home/ilg/actions-runners/xpack-dev-tools/2/_work/riscv-none-elf-gcc-xpack/riscv-none-elf-gcc-xpack/build-assets/build/win32-x64/x86_64-pc-linux-gnu/install/include
+
+Name: liblzma
+Description: General purpose data compression library
+URL: https://tukaani.org/xz/
+Version: 5.8.1
+Cflags: -I${includedir}
+Cflags.private: -DLZMA_API_STATIC
+Libs: -L${libdir} -llzma
+Libs.private: -pthread -lpthread 

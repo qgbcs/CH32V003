@@ -1,0 +1,16 @@
+OpenOCD WCH CH32V003 BOOT write fix source
+===========================================
+
+Package version: 0.11.0-ch32v003bootfix.3
+Release tag: v0.11.0-ch32v003bootfix.3
+Source repo: https://github.com/lopple/openocd-wch-ch32v003-bootfix
+Source commit: ff5b3524489dc5c0dad3a66c1f47cbb070246a93
+
+Source base:
+- WCH OpenOCD source mirror used as the hard-fork base
+- Local CH32V003 BOOT/system flash write fixes in this repository
+
+Release rule:
+- The archive does not redistribute openwch/openocd_wch/bin/openocd.exe.
+- The archive is built for windows-x86 / i686-mingw32 / WCHLinkDLL backend.
+- WCHLinkDLL.dll and CH347DLL.dll are not bundled.

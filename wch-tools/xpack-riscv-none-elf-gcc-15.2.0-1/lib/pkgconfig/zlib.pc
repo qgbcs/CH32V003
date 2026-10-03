@@ -1,0 +1,13 @@
+prefix=/home/ilg/actions-runners/xpack-dev-tools/2/_work/riscv-none-elf-gcc-xpack/riscv-none-elf-gcc-xpack/build-assets/build/win32-x64/x86_64-pc-linux-gnu/install
+exec_prefix=${prefix}
+libdir=/home/ilg/actions-runners/xpack-dev-tools/2/_work/riscv-none-elf-gcc-xpack/riscv-none-elf-gcc-xpack/build-assets/build/win32-x64/x86_64-pc-linux-gnu/install/lib
+sharedlibdir=/home/ilg/actions-runners/xpack-dev-tools/2/_work/riscv-none-elf-gcc-xpack/riscv-none-elf-gcc-xpack/build-assets/build/win32-x64/x86_64-pc-linux-gnu/install/lib
+includedir=/home/ilg/actions-runners/xpack-dev-tools/2/_work/riscv-none-elf-gcc-xpack/riscv-none-elf-gcc-xpack/build-assets/build/win32-x64/x86_64-pc-linux-gnu/install/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.3.1
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

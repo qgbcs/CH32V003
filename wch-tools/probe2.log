@@ -1,0 +1,31 @@
+﻿openocd.exe : Open On-Chip Debugger 0.11.0+dev (2026-06-24-19:09)
+At line:15 char:1415
++ ... wchdriver'; & "$ocd\bin\openocd.exe" -s "$ocd\scripts" -f d:\test\git ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Open On-Chip De...26-06-24-19:09):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Info : only one transport option; autoselect 'sdi'
+Warn : Transport "sdi" was already selected
+Info : WCH-LinkE  mode:RV version 2.22 
+Info : wlink_init ok
+Info : clock speed 6000 kHz
+Info : [wch_riscv.cpu.0] datacount=2 progbufsize=8
+Info : [wch_riscv.cpu.0] Examined RISC-V core; found 1 harts
+Info : [wch_riscv.cpu.0]  XLEN=32, misa=0x40800014
+[wch_riscv.cpu.0] Target successfully examined.
+Info : starting gdb server for wch_riscv.cpu.0 on 3333
+Info : Listening on port 3333 for gdb connections
+===== PC / 关键寄存器 =====
+===== RCC->APB2PCENR @0x40021018 (bit5=IOPD, bit4=IOPC...) =====
+===== GPIOD: CFGLR CFGHR INDR OUTDR BSHR BCR LCKR @0x40011400 =====
+===== SysTick CTLR SR CNT CMP @0xe000f000 =====
+===== Flash 向量表前4字 @0x00000000 =====
+===== 第一次 PC, resume 300ms 后再 halt 对比 =====
+PC1=pc (/32): 0x00000266
+  PC2=pc (/32): 0x00000272
+ (不同 => 用户代码正在运行)
+shutdown command invoked

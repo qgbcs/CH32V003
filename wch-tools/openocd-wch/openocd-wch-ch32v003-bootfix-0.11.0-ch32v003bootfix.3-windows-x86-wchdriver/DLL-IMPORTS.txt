@@ -1,0 +1,7 @@
+Imported DLLs from bin/openocd.exe
+==================================
+
+- KERNEL32.dll
+- msvcrt.dll
+- USER32.dll
+- WS2_32.dll

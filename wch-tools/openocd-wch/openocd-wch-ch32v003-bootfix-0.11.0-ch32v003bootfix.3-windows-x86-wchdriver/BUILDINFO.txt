@@ -1,0 +1,30 @@
+OpenOCD WCH Windows build information
+======================================
+
+Package version: 0.11.0-ch32v003bootfix.3
+Release tag: v0.11.0-ch32v003bootfix.3
+Source repo: https://github.com/lopple/openocd-wch-ch32v003-bootfix
+Source commit: ff5b3524489dc5c0dad3a66c1f47cbb070246a93
+Package label: windows-x86
+Arduino host: i686-mingw32
+Backend: WCHLinkDLL
+Driver stack: WCH official driver stack installed outside this archive
+Configure options: --host=i686-w64-mingw32 --enable-wlinke --enable-wlinke-ch375-dll --disable-ch347 --disable-linuxgpiod --disable-werror --program-prefix=
+OpenOCD version: Open On-Chip Debugger 0.11.0+dev (2026-06-24-19:09)
+openocd.exe SHA256: 6FDBFB7E4ADA07D01533BACE3037475C704881FA4CD49EA5BD52D2F0160CDE84
+openocd.exe size: 16029512
+
+Imported DLLs:
+- KERNEL32.dll
+- msvcrt.dll
+- USER32.dll
+- WS2_32.dll
+
+Bundled runtime DLLs:
+<none>
+
+Not bundled:
+- WCHLinkDLL.dll
+- CH347DLL.dll
+- JLinkARM.dll
+- FTD2XX.dll

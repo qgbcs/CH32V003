@@ -1,0 +1,26 @@
+﻿openocd.exe : Open On-Chip Debugger 0.11.0+dev (2026-06-24-19:09)
+At line:15 char:1596
++ ... wchdriver'; & "$ocd\bin\openocd.exe" -s "$ocd\scripts" -f d:\test\git ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Open On-Chip De...26-06-24-19:09):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Info : only one transport option; autoselect 'sdi'
+Warn : Transport "sdi" was already selected
+Info : WCH-LinkE  mode:RV version 2.22 
+Info : wlink_init ok
+Info : clock speed 6000 kHz
+Info : [wch_riscv.cpu.0] datacount=2 progbufsize=8
+Info : [wch_riscv.cpu.0] Examined RISC-V core; found 1 harts
+Info : [wch_riscv.cpu.0]  XLEN=32, misa=0x40800014
+[wch_riscv.cpu.0] Target successfully examined.
+Info : starting gdb server for wch_riscv.cpu.0 on 3333
+Info : Listening on port 3333 for gdb connections
+DEPRECATED! use 'read_memory' not 'mem2array'
+embedded:startup.tcl:1055: Error: read_memory: too large read request, exeeds 64K elements
+in procedure 'script' 
+in procedure 'mem2array' called at file "embedded:startup.tcl", line 30
+at file "embedded:startup.tcl", line 1055
