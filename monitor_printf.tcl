@@ -1,7 +1,7 @@
 # ============================================================================
 # CH32V003 单线调试 printf 监视器
 #
-# 固件通过 ch32v003fun DEBUGPRINTF 机制把 printf 字符打包写入调试模块的
+# 固件通过 ch32fun (cnlohr/ch32fun) DEBUGPRINTF 机制把 printf 字符打包写入调试模块的
 # DATA0/DATA1 (DM reg 0x04/0x05), 经 SDI 单线 (PD1/SWDIO) 传出, 无需 UART 线。
 # 本脚本不断轮询这两个寄存器并解码显示, 协议与 minichlink DefaultPollTerminal
 # 完全一致:

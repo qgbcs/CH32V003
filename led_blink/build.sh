@@ -7,7 +7,7 @@ set -euo pipefail
 # ============================================================================
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-FUN_DIR="$ROOT_DIR/ch32v003fun"
+FUN_DIR="$ROOT_DIR/ch32fun"
 PROJECT_NAME="main"
 
 echo "=== 1. 检查并自动安装系统依赖 ==="
@@ -38,10 +38,10 @@ fi
 echo ""
 echo "=== 2. 检查并自动下载头文件与依赖库 ==="
 if [ ! -d "$FUN_DIR" ]; then
-    echo "未检测到 ch32v003fun 库，正在通过 Git 自动下载..."
-    git clone https://github.com/cnlohr/ch32v003fun.git "$FUN_DIR"
+    echo "未检测到 ch32fun 库，正在通过 Git 自动下载..."
+    git clone https://github.com/cnlohr/ch32fun.git "$FUN_DIR"
 else
-    echo "ch32v003fun 库已存在。"
+    echo "ch32fun 库已存在。"
 fi
 
 echo ""
@@ -85,7 +85,7 @@ echo "=== 5. 生成项目 Makefile ==="
 MK_FILE_PATH=$(find "$FUN_DIR" -name "ch32fun.mk" -o -name "ch32v003fun.mk" | head -n 1)
 
 if [ -z "$MK_FILE_PATH" ]; then
-    echo "❌ 错误：找不到 ch32fun.mk，请删除 ch32v003fun 文件夹重试！"
+    echo "❌ 错误：找不到 ch32fun.mk，请删除 ch32fun 文件夹重试！"
     exit 1
 fi
 

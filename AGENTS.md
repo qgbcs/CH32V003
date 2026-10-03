@@ -22,13 +22,15 @@
 c:\QGB\CH32V003\
 ├── led_scan\               # 红灯固件（当前主固件）
 │   ├── led_scan.c          # 固件源码（normal/LED 双模式 + 武装邮箱）
-│   ├── funconfig.h         # ch32v003fun 配置覆盖
+│   ├── funconfig.h         # ch32fun 配置覆盖
 │   ├── build_scan.bat      # 编译（纯 ASCII，编码无关）
 │   └── led_scan.{elf,bin,hex,lst,map}   # 构建产物
 ├── led_blink\              # 最小点灯例程 + GDB 调试目标
 │   ├── main.c / build.bat / ch32v003.gdb
-├── ch32v003fun\            # 第三方库（cnlohr/ch32v003fun，勿随意改）
+├── ch32fun\                # 第三方库（上游 cnlohr/ch32fun，勿随意改；2026-10-03 由 ch32v003fun 改名）
 │   └── ch32fun\ch32fun.{c,h}           # 启动文件、mini-printf、DEBUGPRINTF
+│       注意: 库目录是 ch32fun, 内层核心目录也叫 ch32fun, 引用路径形如 ch32fun\ch32fun\ch32fun.h
+│       led_blink\main.c 仍 #include "ch32v003fun.h", 由目录内同名兼容头转发到 ch32fun.h
 ├── wch-tools\              # ★ 全部工具链，项目自包含，不依赖系统安装
 │   ├── openocd-wch\openocd-wch-ch32v003-bootfix-0.11.0-...\
 │   │   ├── bin\openocd.exe
@@ -213,6 +215,7 @@ alive 3
 
 > 格式：`YYYY-MM-DD｜现象 → 根因 → 做法`。简短即可，详情进正文对应章节。
 
+- 2026-10-03｜第三方库目录 ch32v003fun 改名为 ch32fun（对齐上游 cnlohr/ch32fun）→ 同步改两个 build bat、build.sh（含 git clone URL）、Makefile（顺带把失效的绝对路径改成 ../ch32fun/ch32fun）、ch32v003.gdb；debug_v003.bat/.ps1 与 flash/view bat 不含库路径无需改；两项目重新编译通过；库内部文件（README/examples/package.json）属第三方不动
 - 2026-10-03｜创建项目级 skill `windows-bat-encoding`（`.trae\skills\`）→ 沉淀 GB18030 bat 规范、65001 守卫与 gbbat.ps1 转换/校验脚本（两种模式均实跑通过）→ 遇 bat 编码问题由该 skill 触发
 - 2026-10-03｜对已是 GB 的 bat 重跑"UTF-8 读→GB 写"，中文变 `锟斤拷` → Write/Edit 工具按文件原编码写回，转码脚本误读了 GB 字节 → 改用 PowerShell here-string 直接 GB 写盘 + GB 解码抽查（见 6.1）
 - 2026-10-03｜IDE 终端跑 bat 中文全 `?`；UTF-8+chcp65001 方案实测也碎（cmd 按系统 936 预读文件块，切页来不及，还吞 goto）→ bat 开头加 `chcp|find 65001` 守卫，自动开新 936 窗口重跑自己，双击则原地运行（见 6.8）

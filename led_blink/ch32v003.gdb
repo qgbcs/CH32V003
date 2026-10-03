@@ -5,7 +5,7 @@ set height unlimited
 set output-radix 16
 
 # 本机 xpack GCC 编译, 调试信息中的源码路径即为 C:/QGB/... 绝对路径, 无需映射
-directory C:/QGB/CH32V003/led_blink C:/QGB/CH32V003/ch32v003fun/ch32fun
+directory C:/QGB/CH32V003/led_blink C:/QGB/CH32V003/ch32fun/ch32fun
 
 file main.elf
 
